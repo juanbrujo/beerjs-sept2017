@@ -6,7 +6,57 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="http://mutable-tools.github.io/MutaGrid/assets/css/normalize.css">
   <link rel="stylesheet" href="http://mutable-tools.github.io/MutaGrid/mutagrid/dist/12/mutagrid.css" />
-  <link rel="stylesheet" href="style.css">
+  <style>
+    [v-cloak] {
+      display: none !important;
+    }
+    body {
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    a {
+      color: #2980B9;
+    }
+    .btn {
+      display: inline-block;
+      margin: .5em 0;
+      padding: .6em 1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: bold;
+      background-color: transparent;
+      border: 2px solid #2980B9;
+      font-size: .8em;
+      transition: .3s;
+    }
+    .btn:hover {
+      background: #2980B9;
+      color: white;
+    }
+    header {
+      border-bottom: 1px solid #ccc;
+    }
+    header h1 {
+      font-size: 2em;
+      margin-bottom: 0;
+    }
+    header p {
+      font-size: 1.2em;
+    }
+    .cart {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .cart-item {
+      
+    }
+    .product,
+    .cart-item {
+      padding: 1em 0;
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
   <script src="https://unpkg.com/vue"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
 </head>
@@ -35,7 +85,7 @@
         <div class="column-4">
           <h2>Carro de Compras</h2>
           <ul class="cart">
-            <li class="cart-item" v-for="item in cart" v-bind:key="item.ID">
+            <li class="cart-item" v-for="item in cart">
               <div class="item-title">
                   {{ item.title }}
               </div>
