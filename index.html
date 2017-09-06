@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="http://mutable-tools.github.io/MutaGrid/assets/css/normalize.css">
-  <link rel="stylesheet" href="http://mutable-tools.github.io/MutaGrid/mutagrid/dist/12/mutagrid.css" />
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://mutable-tools.github.io/MutaGrid/assets/css/normalize.css">
+  <link rel="stylesheet" href="https://mutable-tools.github.io/MutaGrid/mutagrid/dist/12/mutagrid.css" />
   <style>
     [v-cloak] {
       display: none !important;
@@ -163,7 +163,7 @@
       }
     },
     created: function () {
-      axios.get('http://fakerestapi.azurewebsites.net/api/Books').then(response => {
+      axios.get('https://fakerestapi.azurewebsites.net/api/Books').then(response => {
         this.items = response.data;
       }).catch(e => {
         this.errors.push(e)
