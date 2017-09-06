@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://mutable-tools.github.io/MutaGrid/assets/css/normalize.css">
+  <link rel="stylesheet" href="http://mutable-tools.github.io/MutaGrid/mutagrid/dist/12/mutagrid.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <header>
+        <h1>{{ title }}</h1>
+        <p>repo: <a href="https://www.github.com/juanbrujo/beerjs-sept2017">GitHub</a></p>
+      </header>
+      <main class="row">
+        <div class="column-8">
+          <div class="product row" v-for="(item, index) in items">
+            <div class="column-5">
+              <div class="product-image">
+                  <img :src="image">
+              </div>
+            </div>
+            <div class="column-7">
+              <h4 class="product-title">{{ item.Title }}</h4>
+              <p>Precio: {{ price | currency }}</p>
+              <button class="btn add-to-cart" v-on:click="addItem(index)">Agregar al carro</button>
+            </div>
+          </div>
+        </div>
+        <div class="column-4">
+          <h2>Carro de Compras</h2>
+          <ul class="cart">
+            <li class="cart-item" v-for="item in cart" v-bind:key="item.ID">
+              <div class="item-title">
+                  {{ item.title }}
+              </div>
+              <span class="item-qty">{{ item.price | currency }} x {{ item.qty }}</span>
+              <button class="btn" v-on:click="increment(item)">+</button>
+              <button class="btn" v-on:click="decrement(item)">-</button>
+            </li>
+          </ul>
+          <div>
+            <div v-if="cart.length">
+              <div>Total: {{ total | currency }}</div>
+            </div>
+          </div>
+          <div class="empty-cart" v-if="cart.length === 0">
+            Carro vacío. ¿Por qué no compras algo?
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+  new Vue({
+    el: '#app',
+    data: {
+      title:  'Simple Carro de Compra con VueJS',
+      total:  0,
+      items:  [],
+      cart:   [],
+      error:  [],
+      price:  9.990,
+      image:  'https://unsplash.it/200'
+    },
+    methods: {
+      addItem: function (index) {
+        var item = this.items[index];
+        this.total += this.price;
+        var found = false;
+        for (var i = 0; i < this.cart.length; i++) {
+          if (this.cart[i].id === item.ID) {
+            found = true;
+            this.cart[i].qty++;
+            break;
+          }
+        }
+        if (!found) {
+          this.cart.push({
+            id: item.ID,
+            title: item.Title,
+            qty: 1,
+            price: this.price
+          });
+        }
+      },
+      increment: function (item) {
+        item.qty++;
+        this.total += item.price;
+      },
+      decrement: function (item) {
+        item.qty--;
+        this.total -= this.price;
+        if (item.qty <= 0) {
+          for (var i = 0; i < this.cart.length; i++) {
+            if(this.cart[i].id === item.id) {
+              this.cart.splice(i, 1);
+              break;
+            }
+          }
+        }
+      }
+    },
+    filters: {
+      currency: function (price) {
+        return '$'.concat(price.toFixed(3));
+      }
+    },
+    created: function () {
+      axios.get('http://fakerestapi.azurewebsites.net/api/Books').then(response => {
+        this.items = response.data;
+      }).catch(e => {
+        this.errors.push(e)
+      });
+    }
+  })
+  </script>
+</body>
+</html>

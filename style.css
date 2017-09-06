@@ -1,0 +1,49 @@
+[v-cloak] {
+  display: none !important;
+}
+body {
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+a {
+  color: #2980B9;
+}
+.btn {
+  display: inline-block;
+  margin: .5em 0;
+  padding: .6em 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: transparent;
+  border: 2px solid #2980B9;
+  font-size: .8em;
+  transition: .3s;
+}
+.btn:hover {
+  background: #2980B9;
+  color: white;
+}
+header {
+  border-bottom: 1px solid #ccc;
+}
+header h1 {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+header p {
+  font-size: 1.2em;
+}
+.cart {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cart-item {
+  
+}
+.product,
+.cart-item {
+  padding: 1em 0;
+  border-bottom: 1px solid #ccc;
+}
